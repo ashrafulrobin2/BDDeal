@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/single_product_code"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="123"
+            android:textAlignment="center"
+            android:layout_gravity="center" />
+    <TextView
+            android:id="@+id/single_product_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30dp"
+            android:text="Name"
+            android:textAlignment="center"
+            android:layout_gravity="center"/>
+    <ImageView
+            android:id="@+id/single_product_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="fitXY" />
+    <TextView
+            android:id="@+id/single_product_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:text="Price"
+            android:textAlignment="center"
+            android:layout_gravity="center"/>
+    <TextView
+            android:id="@+id/single_product_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="10dp"
+            android:text="Description"
+            android:layout_gravity="start"/>
+    <Button
+            android:id="@+id/single_product_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order"
+            android:layout_gravity="center"/>
+    <Button
+            android:id="@+id/single_product_order_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_call"
+            android:layout_gravity="center"/>
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <TextView
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="30sp"
+            android:text="Contact Us"
+            android:textAlignment="center"
+            android:textStyle="normal|bold"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+    <TextView
+            android:id="@+id/contact_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:text="@string/contact_mobile"
+            android:paddingLeft="10dp"/>
+    <Space
+            android:layout_width="match_parent"
+            android:layout_height="5dp"/>
+    <TextView
+            android:id="@+id/contact_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:paddingLeft="10dp"
+            android:text="@string/contact_email"/>
+</LinearLayout>
