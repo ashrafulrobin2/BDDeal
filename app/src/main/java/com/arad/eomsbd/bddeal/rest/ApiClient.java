@@ -8,7 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by eomsbd on 7/17/2017.
  */
 public class ApiClient {
-    private static final String BASE_URL = "http://eomsbd.com/api/";
+    private static final String BASE_URL = "http://cutpricebd.com/oms/api/";
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient(){

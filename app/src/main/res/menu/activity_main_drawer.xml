@@ -5,7 +5,20 @@
         <item
                 android:id="@+id/nav_home"
                 android:icon="@drawable/ic_home"
-                android:title="@string/nav_home"/>
+            android:title="@string/nav_home"
+            android:checked="true">
+            <menu>
+                <group>
+                    <item
+                        android:title="one"></item>
+                    <item
+                        android:title="two"></item>
+                    <item
+                        android:title="three"></item>
+
+                </group>
+            </menu>
+        </item>
         <item
                 android:id="@+id/nav_shopping"
                 android:icon="@drawable/ic_shopping"

@@ -1,8 +1,7 @@
 package com.arad.eomsbd.bddeal.rest;
 
-import com.arad.eomsbd.bddeal.model.Category;
+import com.arad.eomsbd.bddeal.category_model.Category;
 import com.arad.eomsbd.bddeal.model.Order;
-import com.arad.eomsbd.bddeal.model.Product;
 import com.arad.eomsbd.bddeal.model.ProductResponse;
 import retrofit2.Call;
 import retrofit2.http.*;
@@ -11,7 +10,7 @@ import retrofit2.http.*;
  * Created by eomsbd on 7/17/2017.
  */
 public interface ApiInterface {
-    @GET("product/read.php")
+ @GET("product/read.php")
     Call<ProductResponse> getProducts();
 
     @GET("product/read_one.php?id={id}")
@@ -30,9 +29,9 @@ public interface ApiInterface {
                           @Field("order_comment") String order_comment,
                           @Field("product_id") int product_id);
 
-    @GET("category/read_main.php")
+    @GET("menu/mainMenu")
     Call<Category> getMainCategory();
 
-    @GET("product/search.php?id={id}")
+  @GET("product/search.php?id={id}")
     Call<ProductResponse> getSearchResult(@Path("id") String query);
 }

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 /**
  * Created by eomsbd on 6/19/2017.
  */
-public class Product {
+public class  Product {
     @SerializedName("product_code")
     public int product_code;
     @SerializedName("product_name")

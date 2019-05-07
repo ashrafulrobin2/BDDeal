@@ -11,7 +11,10 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.arad.eomsbd.bddeal.R;
+import com.arad.eomsbd.bddeal.category_model.Category;
 import com.arad.eomsbd.bddeal.model.Product;
 import com.arad.eomsbd.bddeal.model.ProductResponse;
 import com.arad.eomsbd.bddeal.rest.ApiClient;
@@ -30,23 +33,26 @@ public class MainCategoryProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int category = getIntent().getIntExtra("category", 0);
+        final int category = getIntent().getIntExtra("category", 0);
         String categoryName = getIntent().getStringExtra("category_name");
 
         TextView productGroupName = (TextView) findViewById(R.id.product_group_name);
         productGroupName.setText(categoryName);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ProductResponse> call = apiService.getMainCategoryProducts(category);
-        call.enqueue(new Callback<ProductResponse>() {
+        Call<Category> call = apiService.getMainCategory();
+        call.enqueue(new Callback<Category>() {
             @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                List<Product> products = response.body().getResults();
-                Log.d(TAG, "Number of product received: " + products.size());
+            public void onResponse(Call<Category> call, Response<Category> response) {
+
+                Category category1=response.body();
+                Toast.makeText(MainCategoryProductActivity.this,"id"+category1.getData().get(0).getMcId(),Toast.LENGTH_SHORT).show();
+
+               // Log.d(TAG, "Number of product received: " + products.size());
             }
 
             @Override
-            public void onFailure(Call<ProductResponse> call, Throwable t) {
+            public void onFailure(Call<Category> call, Throwable t) {
                 Log.e(TAG, t.toString());
             }
         });

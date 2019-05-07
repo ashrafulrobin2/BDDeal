@@ -3,6 +3,7 @@ package com.arad.eomsbd.bddeal.activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Bundle;
@@ -23,6 +24,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.*;
+
+import com.arad.eomsbd.bddeal.category_model.Category;
 import com.arad.eomsbd.bddeal.model.Product;
 import com.arad.eomsbd.bddeal.R;
 import com.arad.eomsbd.bddeal.model.ProductResponse;
@@ -37,6 +40,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static SharedPreferences sharedpreferences;
+    public static final String mypreference = "mypref";
+    int data;
+    private Context context = MainActivity.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,7 @@ public class MainActivity extends AppCompatActivity
         TextView productGroupName = (TextView) findViewById(R.id.product_group_name);
         productGroupName.setText(R.string.product_group_name);
 
+        sharedpreferences = context.getSharedPreferences( "details", MODE_PRIVATE );
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -68,15 +76,45 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         ApiInterface apiService = ApiClient.getClient().create(ApiInterface.class);
-        Call<ProductResponse> call = apiService.getProducts();
-        call.enqueue(new Callback<ProductResponse>() {
+        Call<Category> call = apiService.getMainCategory();
+        call.enqueue(new Callback<Category>() {
             @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                List<Product> products = response.body().getResults();
+            public void onResponse(Call<Category> call, Response<Category> response) {
+              Category category=response.body();
+              if (response.isSuccessful() && category!=null){
+                  String name0=category.getData().get(0).getMcName();
+                  String name1=category.getData().get(1).getMcName();
+                  String name2=category.getData().get(2).getMcName();
+                  String name3=category.getData().get(3).getMcName();
+                  String name4=category.getData().get(4).getMcName();
+                  String name5=category.getData().get(5).getMcName();
+                  String name6=category.getData().get(6).getEnMcName();
+                  String name7=category.getData().get(7).getEnMcName();
+                  String name8=category.getData().get(8).getEnMcName();
+                  String name9=category.getData().get(9).getEnMcName();
+                  String name10=category.getData().get(10).getEnMcName();
+
+
+                  String id0=category.getData().get(0).getMcId();
+
+
+                  SharedPreferences.Editor editor = sharedpreferences.edit();
+
+                  editor.putString("id0",id0);
+
+                  editor.putString( "name0", name0 );
+                  editor.putString( "name1", name1 );
+                  editor.putString( "name2", name2 );
+                  editor.putString( "name3",name3 );
+                  editor.putString( "name4",name4 );
+                  editor.putString( "name5",name5 );
+                  editor.apply();
+                  editor.commit();
+              }
 //                Log.d(TAG, "Number of product received: " + products.size());
             }
             @Override
-            public void onFailure(Call<ProductResponse> call, Throwable throwable) {
+            public void onFailure(Call<Category> call, Throwable throwable) {
                 Log.e(TAG, throwable.toString());
             }
         });
@@ -141,34 +179,48 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        String id0=sharedpreferences.getString("id0","details");
 
+
+
+        String name0  =sharedpreferences.getString("name0","details");
+        String name1=sharedpreferences.getString("name1","details");
+        String name2 =sharedpreferences.getString("name2","details");
+        String name3=sharedpreferences.getString("name3","details");
+        String name4  =sharedpreferences.getString("name4","details");
+        String name5=sharedpreferences.getString("name5","details");
+        String name6  =sharedpreferences.getString("name6","details");
+        String name7=sharedpreferences.getString("name7","details");
+        String name8  =sharedpreferences.getString("name8","details");
+        String name9=sharedpreferences.getString("name9","details");
+        String name10=sharedpreferences.getString("name10","details");
         if (id == R.id.nav_home) {
             Intent intentHome = new Intent(this, MainActivity.class);
             this.startActivity(intentHome);
         } else if (id == R.id.nav_gents) {
             Intent intentGents = new Intent(this, MainCategoryProductActivity.class);
-            intentGents.putExtra("category", "2");
-            intentGents.putExtra("category_name", R.string.nav_gents);
+            intentGents.putExtra("category",id0 );
+            intentGents.putExtra("category_name", name0);
             this.startActivity(intentGents);
         } else if (id == R.id.nav_girls) {
             Intent intentGirls = new Intent(this, MainCategoryProductActivity.class);
-            intentGirls.putExtra("category", "3");
-            intentGirls.putExtra("category_name", R.string.nav_girls);
+           // intentGirls.putExtra("category", "3");
+            intentGirls.putExtra("category_name", name1);
             this.startActivity(intentGirls);
         } else if (id == R.id.nav_kids) {
             Intent intentKids = new Intent(this, MainCategoryProductActivity.class);
-            intentKids.putExtra("category", "8");
-            intentKids.putExtra("category_name", R.string.nav_kids);
+           // intentKids.putExtra("category", "8");
+            intentKids.putExtra("category_name", name2);
             this.startActivity(intentKids);
         } else if (id == R.id.nav_home_decor) {
             Intent intentHomeDecor = new Intent(this, MainCategoryProductActivity.class);
-            intentHomeDecor.putExtra("category", "4");
-            intentHomeDecor.putExtra("category_name", R.string.nav_home_decor);
+            //intentHomeDecor.putExtra("category", "4");
+            intentHomeDecor.putExtra("category_name",name3);
             this.startActivity(intentHomeDecor);
         } else if (id == R.id.nav_gift) {
             Intent intentGift = new Intent(this, MainCategoryProductActivity.class);
-            intentGift.putExtra("category", "5");
-            intentGift.putExtra("category_name", R.string.nav_gift);
+           // intentGift.putExtra("category", "5");
+            intentGift.putExtra("category_name", name4);
             this.startActivity(intentGift);
         }
 
